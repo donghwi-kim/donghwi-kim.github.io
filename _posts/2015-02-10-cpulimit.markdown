@@ -1,0 +1,58 @@
+---
+layout:	post
+title:	"cpulimit"
+date:	2015-02-10 22:03:00
+categories:	jekyll update
+---
+컴퓨터를 쓰다보면 cpu사용량이 많아져서 다른 프로세스에 영향이 미칠때 곤란한 경우가 많다.
+예를 들어 압축을 하는경우 보통 cpu가 90%를 넘게 점유를 하는경우가 많다.
+이럴때 쓸쑤 있는 좋은 툴이 있다.
+
+cpulimit은 해당 프로세스의 cpu점유율을 제한한다.
+내부적으로 어떤방식으로 돌아가는지는 소스코드를 봐야 알겠지만, 서버에서 배치프로그램을 돌려야할때 유용할듯 싶다.
+
+cpulimit 공식 사이트 : <a href="http://cpulimit.sourceforge.net/">http://cpulimit.sourceforge.net/</a>
+
+해당 사이트에서 다운받아도 되고 필자는 github(<a href="https://github.com/opsengine/cpulimit">https://github.com/opsengine/cpulimit</a>)에서 clone하여 사용하였다.
+
+아쉽게도 Windows사용자에 대한 언급이 없다.
+
+설치방법은 매우 간단하다. 다운받은 cpulimit압축파일을 해제하고 make명령어를 이용하여 설치를하면 cpulimit이라는 바이너리가 생긴다.(설명은 github의 README에 잘나와있다.)
+사용 설명은 공식 사이트 하단 부분에 있다.
+
+cpulimit을 치면 다른 기본명령어들처럼 cpulimit명령어에 대한 설명이 출력된다.
+
+![](/img/cpulimit/cpulimit_command.png)
+
+옵션은 총 4가지가 있다.
+<ul>
+<li> 먼저 가장 기본이되는 cpu 점유율 제한하는 옵션은 -l이다. -l 10 이렇게 명시하면 10퍼센트 이상의 점유를 못하게 제한 한다는 의미이다.</li>
+<li> -v는 cpulimit이 제어한 결과를 통계로 실시간으로 보여준다.</li>
+<li> -z는 지정한 타켓 프로세스가 없거나 죽게되면 cpulimit을 종료시킨다.</li>
+<li> -i 옵션은 타겟프로세스의 자식프로세스까지 제한을 한다.(자식포함해서의 cpu점유율인지는 확실히 모르겠다)</li>
+</ul>
+
+타겟지정 옵션은 총 3가지가 있다.
+<ul>
+<li> 타겟 옵션으로는 먼저 -p옵션을 사용하면 해당 프로세스 id를 제한한다는것이다. 이미 실행중인 프로세스를 제한할때 사용하면 좋을것 같다.</li>
+<li> -e 옵션은 실행가능한 파일을 명시하여 실행시킴과 동시에 점유율을 제한한다.</li>
+<li> 마지막으로 명령어를 적어주면 되는데 명령을 실행과 동시에 점유율을 제한한다.</li>
+</ul>
+
+다음은 사용예제이다.
+
+cpu를 거의 점유하는 gzip명령어에 대해 cpulimit을 실행시켜보겠다.(용량이 큰파일이 없어 윈도우 이미지를 압축하겠다)
+
+cpulimit -l 10 -v -i gzip Windows8.iso
+
+![](/img/cpulimit/cpulimit_statistics.png)
+
+보이는것과같이 cpu의 점유율이 10퍼센트내외로 계속 제한되는것을 볼 수 있으며 실행 첫줄에는 프로세스의 id를 볼 수 있다.
+
+cpulimit으로 서비스를 가동중인 서버에서 cpu점유율을 낮춰서 배치를 돌리게 된다면 L4에서 제외시켜 수동으로 진행시키거나 서비스를 중단시키고 작업을 진행할 필요가 없어진다.
+
+서버에 쌓이는 로그를 압축할일이 종종 있는데 cpulimit을 사용한다면 L4에서 제외시키거나 장애를 주지않고 작업을 진행할 수 있을것같다.
+
+참고사이트: <a href="http://cpulimit.sourceforge.net/">http://cpulimit.sourceforge.net/</a>
+
+<a href="https://github.com/opsengine/cpulimit">https://github.com/opsengine/cpulimit</a>
