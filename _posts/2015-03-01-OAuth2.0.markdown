@@ -6,22 +6,30 @@ categories:	jekyll update
 ---
 OAuth2.0에 대해 알아보기 위해 국내 서적을 찾아봤더니 거의 대부분이 1.0에 대해 다루고 있었고, 2.0으로 있는것은 E-book으로 되어있었다.
 또한 내용이 대부분 1.0이나 OAuth에 대한 약간의 배경지식을 필요로 했다.
-OAuth2.0을 알아보기 위해 처음에는 어느정도 OAuth에 대한 지식을 습득하기 위해 블로그를 먼저 보고 ietf문서를 보면서 공부를 했었다.
+
+OAuth2.0을 알아보기 위해 처음에는 어느정도 OAuth에 대한 지식을 습득하기 위해 블로그를 먼저 보고 RFC문서를 보면서 공부를 했었다.
+
 OAuth를 공부하면서 가장 힘들었던점은 Resource Owner, Client 등 용어가 헷갈리면서 혼란이 매우 자주왔었다.
 용어먼저 정리하고나서 OAuth를 공부하는것이 도움이 될것이다.
 
 ![](/img/OAuth2.0/IntroOauth.jpg)
 OAuth에는 총 4가지 Role이 존재한다. 여기서 Resource Owner와 Client가 가장 헷갈렸다. Resource Owner는 자원을 소유하고 있는 실제 사용자라고 생각하면되고, Client는 이 자원들을 접근하려는 Application(Web, App)이 되겠다.
+
 OAuth2.0에는 여러 상황을 대비한 Profile 과 Grant type이 존재한다. 모든 profile과 grant type을 설명하고 싶지만, 주로 사용하는 Authorization Code와 Implicit에 대해서만 설명하겠다.
+
 OAuth에는 2가지의 Token이 존재하는데, 1개는 Access Token(해당 토큰으로 자원에 접근), 나머지 하나는 해당 Access Token이 만료가 될 경우, 재발급을 받을 수 있는 Refresh Token이 있다. 즉. Access Token은 만료시간이 존재하고, 이를 위해서 Refresh Token이 존재하는데, Refresh Token은 필수가 아니다.(다른 방법으로도 Access Token을 발급해도 된다는 말이다.)
 
 ![](/img/OAuth2.0/AbstractFlow.jpg)
-AbstractFlow를 보면 대충 어떤식으로 동작하는지는 느낌이 올것이다. 권한코드 요청, 수여 -> AcessToken 요청, 수여 -> Resource 요청, 수여 이런 방식으로 한단계 한단계씩 코드, 토큰으로 접근하여 최종적으로 자원을 얻을 수 있다. 여기서 Authorization Code의 경우 위의 과정을 모두 거치고, Implicit의 경우 권한코드 부분이 없다.(따라서 좀 더 Flow가 간결하다.)
+AbstractFlow를 보면 대충 어떤식으로 동작하는지는 느낌이 올것이다.
+
+권한코드 요청, 수여 -> AcessToken 요청, 수여 -> Resource 요청, 수여 이런 방식으로 한단계 한단계씩 코드, 토큰으로 접근하여 최종적으로 자원을 얻을 수 있다. 여기서 Authorization Code의 경우 위의 과정을 모두 거치고, Implicit의 경우 권한코드 부분이 없다.(따라서 좀 더 Flow가 간결하다.)
+
 해당 그림에서보면 Protocol이라고 써있는것을 볼 수 있다. 하지만 IETF에서는 Framework라고 써있기도 하다.
 
 
 ![](/img/OAuth2.0/AuthorizeCodeFlow.jpg)
 위의 추상화된 Flow에 비해 조금더 복잡해 보이긴 하지만 같은 그림이라고 생각하면 될것같다. 다만 좀더 구체적으로 그렸기 때문에 복잡해 보인다. 추상화된 Flow에서는 구체적인 Role에 따른 그림이 없기 때문이다. 여기서 부터 Role에 대해 좀 더 생각해보고 공부해야한다. 이 부분 부터 Role이 나뉘기 때문에 Client와 Resource Owner에 대해 많이 헷갈릴것이다. 나도 여기서 많이 헷갈렸고 5번정도 다시보고 그나마 조금 이해했던것 같다.
+
 빨간 글씨로 된 부분은 필수 항목으로 요청시에 해당 파라미터는 필수적으로 있어야 한다.
 <ul>
 	<li>response_type는 반드시 code가 되어야 한다.(Implicit flow의 경우 token)</li>
@@ -39,9 +47,11 @@ Implicit Flow는 Authorization code와 달리 조금 단순해 보인다.(Abstra
 
 ![](/img/OAuth2.0/etc.jpg)
 OAuth는 아직까지 2.0보다 1.0을 더 많이 쓰는것 같다. 책에서 봤었을때 적용시킨 사이트는 국내외 유명포털 또는 SNS를 제외하고 사용한다는 것을 보지못했다.
+
 그럼에도 불구하고 2.0을 소개하는 이유는 2.0은 1.0보다 더 많은 상황에 대해서 적용시킬 수 있고, 1.0에는 여러가지 보안문제와 앞으로 많은 사이트들이 2.0을 요구할것이고 2.0으로 구현할것이다. 또한 RFC문서를 보면 OAuth2.0이 확장성에 용이하다는것을 볼 수 있다.
 
 OAuth에 대해 잘 이해가 가지 않는 부분이 있다면, 직접 구글이나 페이스북, 트위터(OAuth 2.0을 지원하는 사이트)등의 client_id를 가지고 한 step씩 시도해보면 그래도 이해가 조금이나마 될것이다. 하다보면 에러코드에 막힐경우가 종종 있을텐데 에러코드는 해당 API문서에 나와있거나, RFC문서를 참고해서 해결하면 될것이다.
+
 RFC문서는 구체적으로 나와있으면서도 약간 추상적이기도 하다. OAuth를 빠르게 이해하려면 실습을 해보면서 하는것이 가장 빠르게 이해할 수 있다. 더군다나 한글로 된 OAuth책이나 문서는 많이 부족하므로 다른 많은 블로그를 참조하고, Naver나 Daum의 OAuth를 사용해보는것을 추천한다.
 
 참고한 사이트: <a href="http://tools.ietf.org/html/rfc6749">http://tools.ietf.org/html/rfc6749</a>
