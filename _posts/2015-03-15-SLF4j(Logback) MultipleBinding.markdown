@@ -33,13 +33,13 @@ Log에 남겨진 단서는 처음 Tomcat구동시에 application-context나 serv
 
 나 같은 경우, 따로 에러가 나는것도 아니고 단순히 아래와 비슷한 로그가 찍혔다.
 
-{% highlight console %}
+{% highlight xml %}
 SLF4J: Class path contains multiple SLF4J bindings. 
 SLF4J: Found binding in [jar:file:/Users/me/.m2/repository/org/slf4j/slf4j-log4j12/1.5.8/slf4j-log4j12-1.5.8.jar!/org/slf4j/impl/StaticLoggerBinder.class] 
 SLF4J: Found binding in [jar:file:/Users/me/.m2/repository/ch/qos/logback/logback-classic/1.0.6/logback-classic-1.0.6.jar!/org/slf4j/impl/StaticLoggerBinder.class] 
 SLF4J: See slf4j.org/… for an explanation.
 SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
-{% highlight console	 %}
+{% endhighlight xml %}
 
 로그에 정확한 설명은 잘 모르겠지만, 대충 로그를 읽어보면 이해가 된다.
 
