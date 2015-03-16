@@ -4,8 +4,14 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+GitHub 블로그입니다.
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+Web Developer 이며, 앞으로 기술과 관련된 시행착오하면서 배운점을 쓰는 블로그입니다.
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+아직 정보가 많이 없고 경험도 많이 없지만, 시간되는대로 계속 글을 올리려 합니다.
+
+방문을 환영합니다!
+
+틀린 내용이나 잘못된 내용은 GitHub에 이슈부탁드립니다.
+
+GitHub 주소 : [github.com/donghwi-kim/issues](https://github.com/donghwi-kim/donghwi-kim.github.io/issues)
