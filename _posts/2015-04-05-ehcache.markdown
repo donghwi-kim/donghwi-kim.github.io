@@ -1,0 +1,103 @@
+---
+layout:	post
+title:	"ehcache적용"
+date:	2015-04-05 22:00:00
+categories:	jekyll update
+---
+ehcache
+
+ehcache는 spring에서 지원하는 cache 구현체중 하나이다.
+
+ehcache의 annotation을 사용하면 cache 적용이 매우 간단하게 된다.
+
+그래서 구글에서 검색해봤더니, <a href="http://ehcache.org/">ehcache.org</a> 와 <a href="https://code.google.com/p/ehcache-spring-annotations/">구글프로젝트</a>를 찾을 수 있었다.
+
+ehcache.org에서 사용자 가이드를 보려고 documentation을 봤더니 버전별로 나열되어있고, 처음 사용하려는 사용자에게는 약간의 어려움이 있어보였다.
+
+그래서 구글프로젝트에 있는 ehcache-spring-annotations의 wiki를 봤더니 설정하는 부분부터 사용자에 대한 간단한 가이드가 있었다.
+
+구글프로젝트에 있던 가이드는 매우 간단하였다. ehcache-spring-annotations의 dependency를 pom.xml에 추가하고, sevletcontext.xml에 ehcache에 대한 설정을 적용하고, cache를 사용하는 함수에 @Cacheable(cacheName)을 사용하면 된다고 적혀있었다.
+
+하지만, 해당 가이드 따라 적용을 해봤더니, 프로젝트 실행하자마자 tomcat에서 오류가 났었고, 해당 오류를 수정하기 위해 많은 시간을 보냈다.
+처음 보는 오류라서 시간도 오래걸리고, 결국은 해결은 못해서 ehcache에 대해 적용한 블로그 글들을 참고하여 테스트 하였다.
+
+적용하는 방법은 구글프로젝트와 매우 유사하였다. 다른 부분은 @Cacheable(value, key) annotation 형식이 조금 달랐다.
+
+pom.xml에 추가해야할 depndency는 아래와 같다.
+{% highlight xml %}
+		<dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>${ehcacheVersion}</version>
+        </dependency>
+ {% endhighlight %}
+
+ context.xml파일에 cache관련 설정 파일을 import 또는 적용 시킨다.
+ {% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+ 
+    <cache:annotation-driven cache-manager="cacheManager" />
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager">
+            <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+                <property name="configLocation" value="classpath:ehcache.xml"></property>
+            </bean>
+        </property>
+    </bean>
+</beans>
+{% endhighlight %}
+
+위의 xml에서 보면 classpath에서 ehcache.xml을 설정해주는데, 이를 설정을 안해주면, default로 classpath에서 ehcache이름으로 된 설정파일을 찾는다.
+
+xsi:schemaLocation에서 몇몇 블로그에서 잘못된 설정으로 적혀있었다(해당 부분은 총 짝수개의 파라미터가 온다. 이부분에 대해서 왜 짝수개가 필요한건지 확인해봐야 할거 같다.)
+
+context의 설정이 끝나면, ehcache세부 설정을 해줘야한다.
+ehcach.xml을 classpath또는 명시했던 경로에 설정파일을 생성한다.
+
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" updateCheck="false">
+    <diskStore path="java.io.tmpdir" />
+ 
+    <defaultCache
+        maxElementsInMemory="50000"
+        eternal="false"
+        timeToIdleSeconds="300"
+        timeToLiveSeconds="600"
+        overflowToDisk="false"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+    <cache name="ehcacheCache"
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="600"
+        overflowToDisk="false"
+        diskPersistent="false"
+        diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU">
+    </cache>
+</ehcache>
+{% endhighlight %}
+
+defaultCache는 기본적인 cache설정인데 해당 부분은 기본적으로 설정해야 하는 부분이다.
+timeToIdleSeconds와 timeToLiveSeconds는 이름으로 봐도 어떤 뜻인지는 알겠는데 다소 조금 헷갈린 부분이었다.
+
+이렇게 셋팅이 끝나면, cache를 사용하려는 메소드에 annotation을 적용하면 된다.
+
+{% highlight xml %}
+@Cachable(value="설정했던 cache이름", key="#캐싱하려는 파라미터")
+{% endhighlight %}
+
+메소드에도 이렇게 적용하면, cache적용은 끝이다. 설정하는부분도 간단하고, 사용하는부분도 간단하지만, 적용하는데 고민을 해봐야한다.
+예를 들어 해당 프로젝트를 여러 서버에 배포를 한다면, 서로 정보가 다를 경우가 있기 때문이다.
+
+아직은 적용하는 부분이 매우 단순하여 설정하고 적용하기만 하면 될거같아 이정도만 소개하기로 한다.
