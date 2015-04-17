@@ -94,7 +94,7 @@ timeToIdleSeconds와 timeToLiveSeconds는 이름으로 봐도 어떤 뜻인지�
 이렇게 셋팅이 끝나면, cache를 사용하려는 메소드에 annotation을 적용하면 된다.
 
 {% highlight xml %}
-@Cachable(value="설정했던 cache이름", key="#캐싱하려는 파라미터")
+@Cacheable(value="설정했던 cache이름", key="#캐싱하려는 파라미터")
 {% endhighlight %}
 
 메소드에도 이렇게 적용하면, cache적용은 끝이다. 설정하는부분도 간단하고, 사용하는부분도 간단하지만, 적용하는데 고민을 해봐야한다.
