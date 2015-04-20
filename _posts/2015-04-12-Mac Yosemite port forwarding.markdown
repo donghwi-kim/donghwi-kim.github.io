@@ -7,8 +7,7 @@ categories: jekyll update
 Mac에서 개발하다보면 Tomcat port가 80으로 바뀌지 않아 개발하는데 귀찮음을 느낄때가 많다.
 
 구글에서 Mac에서 8080포트를 80포트로 포트포워딩 하는방법으로 대부분 ipfw 명령어를 사용하는것이 많다.
-
-하지만 Yosemite에서는 ipfw대신 pf를 사용한다고 한다.(<a href="https://discussions.apple.com/thread/6645172">Yosemite firewall: IPFW is gone, Moving to PF</a>)
+<a href="https://discussions.apple.com/thread/6645172">하지만 Yosemite에서는 ipfw대신 pf를 사용한다고 한다.(Yosemite firewall: IPFW is gone, Moving to PF)</a>
 
 아래에 쓴내용은 이미 내 MacBook에 적용하여 사용하고 있으며, 해당 출처는 내 선임분께서 알려주신 방법이다.
 
@@ -19,7 +18,8 @@ com.test파일을 /etc/pf.anchors/ 경로에 생성한다. 물론 /etc인 시스
 
 2. 생성한 파일에 아래 내용으 넣는다.(8080포트를 80 포트로)
 rdr pass on lo0 inet proto tcp from any to any port { 80 8080 } -> 127.0.0.1 port 8080
-rdr은 redirect의 약자인거 같은데 pf에 사용되는 명령어중 하나이다. 이에 대한 자세한 내용은 <a href="http://www.openbsd.org/faq/pf/rdr.html">http://www.openbsd.org/faq/pf/rdr.html</a>를 참고하면 된다.
+rdr은 redirect의 약자인거 같은데 pf에 사용되는 명령어중 하나이다.
+이에 대한 자세한 내용은 <a href="http://www.openbsd.org/faq/pf/rdr.html">http://www.openbsd.org/faq/pf/rdr.html</a>를 참고하면 된다.
 
 간단하게 요약을 하자면, lo0(loopback) 디바이스의 80 또는 8080 포트를 127.0.0.1 8080 으로 리다이렉트 시킨다는 말이다.
 
@@ -36,5 +36,5 @@ sudo pfctl -e
 
 맨 아래의 pfctl 명령어의 f옵션은 파라미터로 오는 파일 옵션으로 ruleset을 변경하는 옵션이다.
 e옵션은 설정한 필터를 적용한다는 옵션이다.
-pfctl 명령어는 다음 사이트를 참고하면 된다. <a href="http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-5.6/man8/pfctl.8?query=pfctl&sec=8&manpath=OpenBSD-5%2e6">http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-5.6/man8/pfctl.8?query=pfctl&sec=8&manpath=OpenBSD-5%2e6</a>
-anchor에 대한 내용은 다은 사이트를 참고하면 된다. <a href="http://www.openbsd.org/faq/pf/anchors.html">http://www.openbsd.org/faq/pf/anchors.html</a>
+pfctl 명령어는 <a href="http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-5.6/man8/pfctl.8?query=pfctl&sec=8&manpath=OpenBSD-5%2e6">다음 사이트</a> 를 참고하면 된다.
+anchor에 대한 내용은 <a href="http://www.openbsd.org/faq/pf/anchors.html">다음 사이트</a>를 참고하면 된다. 
