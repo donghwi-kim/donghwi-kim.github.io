@@ -20,7 +20,6 @@ com.test파일을 /etc/pf.anchors/ 경로에 생성한다. 물론 /etc인 시스
 rdr pass on lo0 inet proto tcp from any to any port { 80 8080 } -> 127.0.0.1 port 8080
 rdr은 redirect의 약자인거 같은데 pf에 사용되는 명령어중 하나이다.
 이에 대한 자세한 내용은 <a href="http://www.openbsd.org/faq/pf/rdr.html">http://www.openbsd.org/faq/pf/rdr.html</a>를 참고하면 된다.
-
 간단하게 요약을 하자면, lo0(loopback) 디바이스의 80 또는 8080 포트를 127.0.0.1 8080 으로 리다이렉트 시킨다는 말이다.
 
 3. /etc/pf.conf 파일을 vi에디터로 연다. 물론 해당 파일도 시스템과 관련된 파일이기 때문에 super user의 권한이 필요하다.
