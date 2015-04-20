@@ -36,5 +36,7 @@ sudo pfctl -e
 
 맨 아래의 pfctl 명령어의 f옵션은 파라미터로 오는 파일 옵션으로 ruleset을 변경하는 옵션이다.
 e옵션은 설정한 필터를 적용한다는 옵션이다.
+
 pfctl 명령어는 <a href="http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-5.6/man8/pfctl.8?query=pfctl&sec=8&manpath=OpenBSD-5%2e6">다음 사이트</a> 를 참고하면 된다.
+
 anchor에 대한 내용은 <a href="http://www.openbsd.org/faq/pf/anchors.html">다음 사이트</a>를 참고하면 된다. 
