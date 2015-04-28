@@ -13,9 +13,6 @@ DHC앱은 API호출 테스트해볼 수 있는 Extension이다.
 아직 알고 사용하는 기능은 그리 많지 않지만, 알고 있는것을 공유하려한다.
 먼저 왼쪽에 있는 탭에는 가장 기본적인 기능인 history와 API를 저장하고 불러올수 있는기능, 전역변수를 선언할 수 있는 기능이 있다.
 
-![](/img/DHC/history.png)
-![](/img/DHC/repository.png)
-
 여기서 history와 API는 Postman에도 있는 기능이다.
 처음 DHC를 사용하면 Postman이 더 직관적인 UI를 가지고 있음을 느낄것이다.
 Postman은 DHC와 달리 저장을 하면 리스트와 같이 1개의 폴더에 모든 파일을 가지고 있다. 이와 같은 구조는 API가 매우 적을때 편한 구조 인거같다.
