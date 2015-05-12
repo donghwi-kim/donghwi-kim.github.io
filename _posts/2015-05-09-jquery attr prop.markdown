@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "jquery attr prop"
-date:   2015-05-02 19:13:31
+date:   2015-05-09 19:13:31
 categories: jekyll update
 ---
 jquery를 사용하다보면 checkbox를 체크, 체크해제할때 attr또는 val으로 셋팅이 안될때 당황한일이있었다.<br>
