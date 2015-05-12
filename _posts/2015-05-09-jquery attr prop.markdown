@@ -6,7 +6,7 @@ categories: jekyll update
 ---
 jquery를 사용하다보면 checkbox를 체크, 체크해제할때 attr또는 val으로 셋팅이 안될때 당황한일이있었다.<br>
 이것과 관련해서 구글링을 하다보면 attr대신에 prop을 쓰면된다는것을 알 수 있다.<br>
-jQuery 1.6버전 이전에는 attr이 prop으로 제어해야할 property value들을 제어할 수 있었는데 이로 인해 정상동작하지 않는 일이 있었다고한다.(<a href="http://api.jquery.com/prop/"http://api.jquery.com/prop/</a> Note아래부분을 읽어보면 나온다.)<br><br>
+jQuery 1.6버전 이전에는 attr이 prop으로 제어해야할 property value들을 제어할 수 있었는데 이로 인해 정상동작하지 않는 일이 있었다고한다.(<a href="http://api.jquery.com/prop/">http://api.jquery.com/prop/</a> Note아래부분을 읽어보면 나온다.)<br><br>
 여기서 attribute와 property의 차이는 무엇일까?<br>
 attribute는 HTML 요소의 정보를 전달하는 이름=값 쌍이다.<br>
 property는 HTML DOM 트리에서 표현되는 값들이다.<br>
