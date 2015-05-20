@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "SQL 전문가 가이드 * 관계형 데이터베이스 개요"
+title:  "SQL 전문가 가이드 - 관계형 데이터베이스 개요"
 date:   2015*05*15 23:13:31
 categories: jekyll update
 ---
