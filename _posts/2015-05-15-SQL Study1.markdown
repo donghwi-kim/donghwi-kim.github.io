@@ -1,14 +1,14 @@
----
+***
 layout: post
-title:  "SQL 전문가 가이드 - 관계형 데이터베이스 개요"
-date:   2015-05-15 23:13:31
+title:  "SQL 전문가 가이드 * 관계형 데이터베이스 개요"
+date:   2015*05*15 23:13:31
 categories: jekyll update
----
+***
 <h1>1절 관계형 데이터베이스 개요</h1>
 <h2>1. 데이터베이스</h2>
 DBMS(Database Management System)는 효율적인 데이터 관리와 데이터 복구 및 손상을 막기위한 기본적인 요구사항을 만족시켜주는 시스템을 말한다.
 <br>
-Database의 발전은 먼저 FileSystem -> 계층형 또는 망형 Database -> 관계형 Database 로 발전하였다.
+Database의 발전은 먼저 FileSystem *> 계층형 또는 망형 Database *> 관계형 Database 로 발전하였다.
 <br>
 FileSystem의 단점으로는 많은 사용자가 동시에 CRUD가 힘들기 때문에 관리가 어려우며 이를 해결하기 위해 여러 파일을 복사하여 작업을 할 경우 데이터의 불일치성이 발생한다.
 <br>
@@ -18,19 +18,19 @@ FileSystem의 단점으로는 많은 사용자가 동시에 CRUD가 힘들기 �
 SQL(Structured Query Language)는 관계형 데이터베이스에서 데이터의 정의(DDL), 데이터 조작(DML), 데이터 제어(DCL)를 하기 위해 사용하는 언어이다. 대부분의 RDBMS의 경우 ANSI/ISO 표준을 따르고 있으며 일부 벤더에 따라 구체적인 용어는 다를 수 있다.
 <br>
 데이터 조작어(DML : Data Manpulation Language)
- - SELECT, INSERT, UPDATE, DELETE
- - 데이터를 조회하거나 검색(SELECT), 변형(삽입, 삭제, 수정)하는 것들을 DML이라 한다.
+ * SELECT, INSERT, UPDATE, DELETE
+ * 데이터를 조회하거나 검색(SELECT), 변형(삽입, 삭제, 수정)하는 것들을 DML이라 한다.
 <br>
 데이터 정의어(DDL : Data Definition Language)
- - CREATE, ALTER, DROP, RENAME
- - 테이블과 같은 데이터 구조를 정의하는데 사용되는 명령어이다.
+ * CREATE, ALTER, DROP, RENAME
+ * 테이블과 같은 데이터 구조를 정의하는데 사용되는 명령어이다.
 <br>
 데이터 제어어(DCL : Data Control Language)
- - DB 객체를 접근하는 권한을 관리하는 명령어이다.
+ * DB 객체를 접근하는 권한을 관리하는 명령어이다.
 <br>
 트랜잭션 제어어(TCL : Transaction Control Language)
- - COMMIT, ROLLBACK
- - DML작업 단위를 제어하는 명령어이다.
+ * COMMIT, ROLLBACK
+ * DML작업 단위를 제어하는 명령어이다.
 <h2>3. TABLE</h2>
 흔히 급하게 메모할때 이곳 저곳에 나열하여 메모하는것보다는 필기 정리하듯이 알아보기 쉽게 데이터를 작성하는것이 데이터를 확인하기 쉽다. 하지만 필기 정리를 하는것보다는 excel처럼 table로 관리하는것이 더 바람직하다.
 <br>
