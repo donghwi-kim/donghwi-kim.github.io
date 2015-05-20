@@ -1,9 +1,9 @@
-***
+---
 layout: post
 title:  "SQL 전문가 가이드 * 관계형 데이터베이스 개요"
 date:   2015*05*15 23:13:31
 categories: jekyll update
-***
+---
 <h1>1절 관계형 데이터베이스 개요</h1>
 <h2>1. 데이터베이스</h2>
 DBMS(Database Management System)는 효율적인 데이터 관리와 데이터 복구 및 손상을 막기위한 기본적인 요구사항을 만족시켜주는 시스템을 말한다.
