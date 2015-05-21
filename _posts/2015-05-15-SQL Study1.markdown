@@ -65,12 +65,32 @@ ERD의 구성요소로는 Entity, Relationship, Attribute이다.
 <br>
 <h1>제 2절 DDL(Data Definition Language</h1>
 <h2>데이터 유형</h2>
-데이터 유형 | 설명
----|---
-*CHARACTER(s)* | 고정 길이 문자열 정보. s보다 길이가 작아도 s만큼의 공간을 차지한다.
-*VARCHAR(s)* | 가변길이 문자열 정보. 최대길이가 s이며 데이터의 크기만큼의 공간을 차지한다.
-*NUMERIC* | 정수, 실수 등 숫자 정보.
-*DATE* | 날짜와 시각 정보
+<table>
+<thead>
+<tr>
+<th>데이터 유형</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>CHARACTER(s)</em></td>
+<td>고정 길이 문자열 정보. s보다 길이가 작아도 s만큼의 공간을 차지한다.</td>
+</tr>
+<tr>
+<td><em>VARCHAR(s)</em></td>
+<td>가변길이 문자열 정보. 최대길이가 s이며 데이터의 크기만큼의 공간을 차지한다.</td>
+</tr>
+<tr>
+<td><em>NUMERIC</em></td>
+<td>정수, 실수 등 숫자 정보.</td>
+</tr>
+<tr>
+<td><em>DATE</em></td>
+<td>날짜와 시각 정보</td>
+</tr>
+</tbody>
+</table>
 <br>
 CHAR와 VARCHAR의 차이는 먼저 저장하는 공간이다. VARCHAR의 경우 데이터의 크기만큼만 공간을 활용하기 때문에 더 적은 영역의 공간을 차지하는 장점이 있다.
 <br>
@@ -104,13 +124,36 @@ CHAR와 VARCHAR의 차이는 먼저 저장하는 공간이다. VARCHAR의 경우
 	<li>데이터의 무결성을 유지하기 위한 데이터베이스의 방법으로 특정 컬럼에 설정하는 제약이다.</li>
 <li>생성시에는 필수 조건이 아니며, 이후에 ALTER TABLE을 통해 추가할 수 있다. 하지만 데이터가 이미 입력되어 있는 경우 처리과정이 쉽지 않다.</li>
 </ul>
-구분 | 설명
---- | ---
-PRIMARY KEY(기본키) | 데이터를 고유하게 식별하기 위한 키. 1개의 테이블에 1개의 기본키만 정의 할 수 있으며 기본키는 NULL을 입력할 수 없다.
-UNIQUE KEY(고유키) | 데이터를 고유하게 식별하기 위한 키. 기본키와 다르게 NULL값을 가질수 있다.
-NOT NULL | NULL값의 입력을 금지한다.
-CHECK | 입력할 수 있는 값의 범위를 제한한다.
-FOREIGN KEY(외래키) | 테이블간의 관계를 정의 하기 위해 키이다.
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRIMARY KEY(기본키)</td>
+<td>데이터를 고유하게 식별하기 위한 키. 1개의 테이블에 1개의 기본키만 정의 할 수 있으며 기본키는 NULL을 입력할 수 없다.</td>
+</tr>
+<tr>
+<td>UNIQUE KEY(고유키)</td>
+<td>데이터를 고유하게 식별하기 위한 키. 기본키와 다르게 NULL값을 가질수 있다.</td>
+</tr>
+<tr>
+<td>NOT NULL</td>
+<td>NULL값의 입력을 금지한다.</td>
+</tr>
+<tr>
+<td>CHECK</td>
+<td>입력할 수 있는 값의 범위를 제한한다.</td>
+</tr>
+<tr>
+<td>FOREIGN KEY(외래키)</td>
+<td>테이블간의 관계를 정의 하기 위해 키이다.</td>
+</tr>
+</tbody>
+</table>
 <br>
 NULL : 공백이나 숫자 0과 전혀 다른 값이며, 조건에 맞는 데이터가 없을때의 공집합과도 다르다. NULL은 아직 정의되지 않은 값이나 입력하지 못한 경우를 의미한다.
 <br>
@@ -194,12 +237,32 @@ DDL의 경우 명령어를 입력하는 순간 해당작업이 즉시 완료된�
 <li>트랜잭션은3가지 명령어를 지원한다. 커밋(COMMIT), 롤백(ROLLBACK), 저장점(SAVEPOINT)</li>
 <li>트랜잭션의 대상이 되는 SQL문은 INSERT, UPDATE, DELETE 등 DML명령어이다.(SELECT의 경우에도 트랜잭션의 대상이 될 수 있다.)</li>
 </ul>
-특성 | 설명
---- | ---
-원자성(atomicity) | 트랜잭션에 정의된 연산은 모두 성공적으로 실행되거나 모두 실행되지 않은 상태가 되어야 한다.
-일관성(consistency) | 트랜잭션이 실행되기 전에 데이터베이스의 내용이 잘못되어 있지 않다면, 트랜잭션 실행 후에도 내용에 잘못이 있으면 안된다.
-고립성(isolation) | 트랜잭션이 실행하는 중에 다른 트랜잭션에 영향을 주어서는 안된다.
-지속성(durability) | 트랜잭션이 성공적으로 수행되면 갱신된 내용은 영구적으로 지속되어야 한다.
+<table>
+<thead>
+<tr>
+<th>특성</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>원자성(atomicity)</td>
+<td>트랜잭션에 정의된 연산은 모두 성공적으로 실행되거나 모두 실행되지 않은 상태가 되어야 한다.</td>
+</tr>
+<tr>
+<td>일관성(consistency)</td>
+<td>트랜잭션이 실행되기 전에 데이터베이스의 내용이 잘못되어 있지 않다면, 트랜잭션 실행 후에도 내용에 잘못이 있으면 안된다.</td>
+</tr>
+<tr>
+<td>고립성(isolation)</td>
+<td>트랜잭션이 실행하는 중에 다른 트랜잭션에 영향을 주어서는 안된다.</td>
+</tr>
+<tr>
+<td>지속성(durability)</td>
+<td>트랜잭션이 성공적으로 수행되면 갱신된 내용은 영구적으로 지속되어야 한다.</td>
+</tr>
+</tbody>
+</table>
 <h2>COMMIT</h2>
 트랜잭션을 완료하는 명령어이다.
 COMMIT 이전의 데이터 상태는 아래와 같다.
@@ -225,8 +288,9 @@ Oracle의 경우 DBMS에서 내부적으로 실행하며, DML문자 수행후 �
 <h2>ROLLBACK</h2>
 트랜잭션 단위로 데이터 변경 사항을 이전으로 되돌리는 명령어 이다. 관련된 행의 잠금이 풀리게 된다.
 <ul>
-	<li>SQL Server의 경우 명시적 트랜잭션을 선언해야 ROLLBACK명령어를 사용할 수 있다.
-<h2>SAVEPOINT</h2></li>
+	<li>SQL Server의 경우 명시적 트랜잭션을 선언해야 ROLLBACK명령어를 사용할 수 있다.</li></ul>
+<h2>SAVEPOINT</h2>
+<ul>
 <li>SAVEPOINT 를 정의하면 트랜잭션에 포함된 전체 작업을 롤백하지 않고 SAVEPOINT 명령어 시점까지 트랜잭션을 롤백 할 수 있다.</li>
 <li>SAVEPOINT savePoint;</li>
 </ul>
