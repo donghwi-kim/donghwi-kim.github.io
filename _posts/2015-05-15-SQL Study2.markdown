@@ -5,14 +5,19 @@ date:   2015-05-15 23:13:31
 categories: jekyll update
 ---
 # 제 5절 WHERE 절 #
+
 ### 1. WHERE 조건절 개요 ###
+
 자신이 원하는 자료만을 검색하기 위해서 WHERE절을 이용하여 자료들에 대하여 제한한다.
+
 ~~~~~~
 SELECT [DISTINCT/ALL] column_name [alias]
 FROM table_name
 WHERE condition;
 ~~~~~~
+
 ### 2. 연산자의 종류 ###
+
  * 비교 연산자
 	* = 같다, > 크다, >= 크거나 같다, < 작다, <= 작거나 같다
  * SQL 연산자
@@ -29,7 +34,9 @@ WHERE condition;
 	* NOT IN (list) : list의 값이 아니다.
 	* IS NOT NULL : NULL이 아니다.
  * 우선순위 : 1. (), 2. NOT연산자, 3. 비교, SQL연산자, 4. AND, 5. OR
+
 ### 3. 비교 연산자 ###
+
 문자열 비교 연산시에는 홑따옴표(') 또는 쌍따옴표(")로 묶어서 처리해야 한다.
 NUMERIC은 인용부호를 사용하지 않아도 된다.
 문자 유형 비교 방법
@@ -40,6 +47,7 @@ NUMERIC은 인용부호를 사용하지 않아도 된다.
 	* BLANK의 수만 다르다면 같은 값으로 결정.
 
 ### 4. SQL 연산자 ###
+
 와일드 카드
  * '%' : 0개 이상의 어떤 문자를 의미
  * '_' : 1개인 단일 문자를 의미
@@ -47,22 +55,29 @@ IS NULL
  * NULL은 값이 존재 하지 않거나 확정되지 않은것으로 BLANK와 다른 값이다.
  * NULL은 값과의 비교연산이 있을경우 FALSE를 리턴한다.
  * NULL값과의 수치연산은 NULL값을 리턴한다.
+
 ### 5. 논리 연산자 ###
+
 ()가 누락될 경우 잘못된 결과가 나올 수 있다.
+
 ### 6. 부정 연산자 ###
 
 ### 7. ROWNUM, TOP ###
+
 Oracle의 ROWNUM은 각 행에 대하여 임시로 부여되는 일련번호로 WHERE절에서 행의 개수를 제한하는 목적으로 사용한다.
 TOP는 결과집합의 행의수를 제한할 수 있다.
 
 # 제 6절 함수(FUNCTION) #
+
 ### 1. 내장 함수 개요 ###
+
 함수는 벤더에서 제공하는 함수인 내장 함수와 사용자가 정의할 수 있는 함수로 나뉜다.
 내장 함수는 단일행 함수, 다중행 함수로 나뉜다.
 다중행 함수는 집계함수, 그룹 함수, 윈도우 함수로 나뉜다.
 함수는 입력된 값이 많아도 출력은 하나만 된다는 M:1관계라는 중요한 특징이 있다.
 단일행 함수는 처리하는 데이터의 형식에 따라 문자형, 숫자형, 날짜형, 변환형, NULL 관련 함수로 나눌수 있다.
 단일행 함수의 종류
+
 * 문자형 함수 : LOWER, UPPER, SUBSTR/SUBSTRING, LENGTH/LEN, LTRIM, RTRIM, TRIM, ASCII
 * 숫자형 함수 : ABS, MOD, ROUND, TRUNC, SIGN, CHR/CHAR, CEIL/CEILING, FLOOR, EXP, LOG, LN, POWER, SIN, COS, TAN
 * 날짜형 함수 : SYSDATE/GETDATE, EXTRACT/DATEPART, TO_NUMBER(TO_CHAR(d, 'YYYY'|'MM'|'DD')/YEAR|MONTH|DAY)
@@ -73,27 +88,40 @@ TOP는 결과집합의 행의수를 제한할 수 있다.
 * 각 행들에 대해 개별적으로 작용, 데이터 값을 조작하고 조작 결과를 리턴한다.
 * 여러 인자를 입력해도 단 하나의 결과만 리턴
 * 중첩이 가능하다
+
 ### 2. 문자형 함수 ###
+
 ### 3. 숫자형 함수 ###
+
 ### 4. 날짜형 함수 ###
+
 단일행 날짜형 데이터 연산
 * 날짜 + 숫자 : 숫자만큼 날짜를 더한다.
 * 날짜 - 숫자 : 숫자만큼 날짜를 뺀다.
 * 날짜1 - 날짜2 : 날짜 수가 나온다.
 * 날짜 + 숫자/24 : 시간을 날짜에 더한다.
+
 ### 5. 변환형 함수 ###
+
 데이터 유형
 * 명시적(Explicit) 데이터 유형 변환 : 명시적으로 데이터 변환형 함수로 데이터 유형을 변환하는 경우
 * 암시적(Implicit) 데이터 유형 변환 : 데이터베이스가 자동으로 데이터 유형을 변환하는 경우
 암시적 데이터 유형 변환이 많을 경우 데이터베이스의 성능 저하가 발생할 수 있다.
+
 ### 6. CASE 표현 ###
+
 CASE는 IF-THEN-ELSE 논리와 유사한 방식을 가진다.
+
 ### 7. NULL 관련 함수 ###
+
 NVL(expr1, expr2) : expr1이 NULL일 경우 expr2값을 출력한다
 NULLIF(expr1, expr2) expr1과 expr2가 같을 경우 NULL을 리턴, 다를 경우 expr1을 출력한다.
 COALESCE(expr1, expr2, ...) 표현식중 NULL이 아닌 최초 표현식을 나타낸다.
+
 # 7절 GROUP BY, HAVING 절 #
+
 ### 1. 집계 합수 ###
+
 집계함수의 특성 : 
 여러행의 그룹이 모여서 그룹당 단 하나의 결과를 돌려주는 함수.
 GROUP BY 절은 행들을 소그룹화 한다.
@@ -106,7 +134,9 @@ max(expr) : 표현식의 최대값
 min(expr) : 표현식의 최소값
 stddev(expr) : 표현식의 표준편차
 variance(expr) : 표현식의 분산
+
 ### 2. GROUP BY ###
+
 SELECT [DISTINCT] column_name [ALIAS]
 FROM table_name
 [WHERE expr]
@@ -120,19 +150,28 @@ GROUP BY절의 특징
  * WHERE절은 GROUP BY 로 그룹을 나누기 전에 행들을 미리 제거한다
  * HAVING 절은 GROUP BY에 대한 조건식이다
  * HAVING절은 보통 GROUP BY절 뒤에 위치한다.
+
 ### 3. HAVING절 ###
+
 FROM절에 정의된 집합에 WHERE의 조건절이 적용된 결과가 GROUP BY절의 대상이 되며, WHERE절에 적용된 결과에 대해서 HAVING절의 조건이 적용된다.
+
 ### 4. CASE 표현을 활용한 월별 데이터 집계 ###
+
 ### 5. 집계 함수와 NULL 처리 ###
+
 # 8절 ORDER BY 절 #
+
 ### 1. ORDER BY 정렬 ###
+
 ORDER BY절은 조회된 데이터를 특정 컬럼을 기준으로 정렬하는데 사용된다.
 ORDER BY절의 특징 : 
  * 기본적인 정렬 순서는 오름차순이다.(ASC)
  * 숫자형은 ASC일 경우 가장 작은 값부터 출력
  * 날짜형은 ASC일 경우 가장 빠른 날짜부터 출력
  * Oracle의 경우 NULL은 ASC일 경우 가장 마지막에, DESC일 경우 가장 먼저 위치한다.
+
 ### 2. SELECT 문장 실행 순서 ###
+
  1. FROM table_name
  2. WHERE expr
  3. GROUP BY column_name|expr
@@ -140,9 +179,13 @@ ORDER BY절의 특징 :
  5. SELECT column_name
  6. ORDER BY colum_name|expr
 위의 순서는 옵티마이저가 syntax, symantic을 검사하는 순서이기도 하다.
+
 ### 3. Top N 쿼리 ###
+
 ROWNUM : Oracle에서 순위가 가장 높은 N개의 로우에 대해서 ROWNUM을 사용하면 잘못된 결과를 가져올 수 있다. 따라서 sub query에서 ORDER BY로 정렬을 한뒤, main query에서 ROWNUM을 사용해야 한다.
+
 # 9절 조인(JOIN) #
+
 2개 이상의 테이블을 연결 및 결합을 하여 데이터를 출력하는것을 JOIN이라 한다.
 PK, FK의 관계로 테이블을 조인할수 있으며, 논리적인 값들의 연관으로도 JOIN이 가능하다.
 2개 이상의 다수 테이블이 사용된다면, 옵티마이저에 의해 순차적인 조인을 처리한다.
