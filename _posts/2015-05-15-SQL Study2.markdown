@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "SQL 전문가 가이드 - 관계형 데이터베이스 개요"
+title:  "SQL 전문가 가이드 - 관계형 데이터베이스 개요 2"
 date:   2015-05-15 23:13:31
 categories: jekyll update
 ---
@@ -37,6 +37,9 @@ WHERE condition;
 
 ##### 3. 비교 연산자 #####
 
+ * 비교 연산자
+	* = 같다, > 크다, >= 크거나 같다, < 작다, <= 작거나 같다
+
 문자열 비교 연산시에는 홑따옴표(') 또는 쌍따옴표(")로 묶어서 처리해야 한다.
 NUMERIC은 인용부호를 사용하지 않아도 된다.
 문자 유형 비교 방법
@@ -46,7 +49,25 @@ NUMERIC은 인용부호를 사용하지 않아도 된다.
 	* 달라진 첫 번째 문자의 값에 따라 크기를 결정
 	* BLANK의 수만 다르다면 같은 값으로 결정.
 
+~~~~~~
+select dummy_id, dummy_name, dummy_birth, dummy_nickname
+from dummy_table
+where dummy_id in (select dummy_id from dummy_table where dummy_id < 50);
+~~~~~~
+
 ##### 4. SQL 연산자 #####
+
+ * SQL 연산자
+	* BETWEEN a AND b : a와 b사이의 값이다.(a,b 포함)
+	* IN (list) : 값이 리스트에 포함된다.
+	* LIKE 'string' : 문자열과 형태가 일치한다.(%,_ 사용)
+	* IS NULL : NULL이다.
+
+~~~~~~
+select dummy_id, dummy_name, dummy_birth, dummy_nickname
+from dummy_table
+where dummy_id between 100 AND 200;
+~~~~~~
 
 와일드 카드
  * '%' : 0개 이상의 어떤 문자를 의미
@@ -56,13 +77,44 @@ IS NULL
  * NULL은 값과의 비교연산이 있을경우 FALSE를 리턴한다.
  * NULL값과의 수치연산은 NULL값을 리턴한다.
 
+~~~~~~
+select dummy_id, dummy_name, dummy_birth, dummy_nickname
+from dummy_table
+where dummy_name like 'A%';
+ 
+select dummy_id, dummy_name, dummy_birth, dummy_nickname
+from dummy_table
+where dummy_name like 'A_C__';
+
+select dummy_id, dummy_name, dummy_birth, dummy_nickname
+from dummy_table
+where dummy_nickname is NULL;
+~~~~~~
+
 ##### 5. 논리 연산자 #####
+
+ * 논리 연산자
+	* AND, OR, NOT
 
 ()가 누락될 경우 잘못된 결과가 나올 수 있다.
 
 ##### 6. 부정 연산자 #####
 
+ * 부정 비교 연산자
+	* != 같지 않다, ^= 같지 않다, <> 같지 않다, NOT column_name = 같지 않다, NOT column_name > 크지 않다.
+ * 부정 SQL 연산자
+	* NOT BETWEEN a AND b : a와 b 사이의 값이 아니다.(a,b값을 포함하지 않는다.)
+	* NOT IN (list) : list의 값이 아니다.
+	* IS NOT NULL : NULL이 아니다.
+
 ##### 7. ROWNUM, TOP #####
+
+~~~~~~
+select dummy_id, dummy_name, dummy_birth, dummy_nickname
+from dummy_table
+where dummy_id <= 200
+AND rownum <= 99;
+~~~~~~
 
 Oracle의 ROWNUM은 각 행에 대하여 임시로 부여되는 일련번호로 WHERE절에서 행의 개수를 제한하는 목적으로 사용한다.
 TOP는 결과집합의 행의수를 제한할 수 있다.
@@ -91,7 +143,39 @@ TOP는 결과집합의 행의수를 제한할 수 있다.
 
 ##### 2. 문자형 함수 #####
 
+~~~~~~
+select length('abcdefghijklmnopqrstuvwxyz') from dual;
+select lower('ABCDEFGHIJKLMNOPqrstUvWxYZ') from dual;
+select upper('upper') from dual;
+select ascii('A') from dual;
+select ascii('a') from dual;
+select chr('34') from dual;
+select concat('hel', 'lo') from dual;
+select substr('my name is', 5) from dual;
+select substr('my name is', 5, 5) from dual;
+select ltrim('                hello my name is eeefewfqwefqerfqerf') from dual;
+select ltrim('hello my name is eeefewfqwefqerfqerf','h') from dual;
+select rtrim('hiiiiiiiiiiii', 'i') from dual;
+select trim(' ' from '       3  ????????? 1       ') from dual;
+~~~~~~
+
 ##### 3. 숫자형 함수 #####
+
+~~~~~~
+select abs(-314134134134134) from dual;
+select sign(-5246245) from dual;
+select mod(143513451345134513451345134513451,345) from dual;
+select ceil(143513461.3445) from dual;
+select floor(32413.34314) from dual;
+select round(134135.5) from dual;
+select trunc(1.134514351345134513451345134513451345, 10) from dual;
+select sin(30) from dual;
+select cos(30) from dual;
+select tan(90) from dual;
+select exp(ln(5)) from dual;
+select power(2, sqrt(9)) from dual;
+select log(11, 121) from dual;
+~~~~~~
 
 ##### 4. 날짜형 함수 #####
 
@@ -100,6 +184,15 @@ TOP는 결과집합의 행의수를 제한할 수 있다.
 * 날짜 - 숫자 : 숫자만큼 날짜를 뺀다.
 * 날짜1 - 날짜2 : 날짜 수가 나온다.
 * 날짜 + 숫자/24 : 시간을 날짜에 더한다.
+
+~~~~~~
+select sysdate from dual;
+select to_number('as234234') from dual;
+select to_number('234234') from dual;
+select to_number('234234ff') from dual;
+select to_number('23f4f234') from dual;
+select to_char(sysdate, 'YYYY/MM/DD') from dual;
+~~~~~~
 
 ##### 5. 변환형 함수 #####
 
@@ -118,6 +211,13 @@ NVL(expr1, expr2) : expr1이 NULL일 경우 expr2값을 출력한다
 NULLIF(expr1, expr2) expr1과 expr2가 같을 경우 NULL을 리턴, 다를 경우 expr1을 출력한다.
 COALESCE(expr1, expr2, ...) 표현식중 NULL이 아닌 최초 표현식을 나타낸다.
 
+~~~~~~
+select NULL + 2 -2 * 2 / 2 from dual;
+select NVL(null , 'NULL') from dual;
+select nullif('a', 'a') from dual;
+select coalesce(null, null, null, null, 'hi', null, null) from dual;
+~~~~~~
+
 # 7절 GROUP BY, HAVING 절 #
 
 ##### 1. 집계 합수 #####
@@ -134,6 +234,17 @@ max(expr) : 표현식의 최대값
 min(expr) : 표현식의 최소값
 stddev(expr) : 표현식의 표준편차
 variance(expr) : 표현식의 분산
+
+~~~~~~
+select count(*) from dummy_table;
+select count(dummy_nickname) from dummy_table;
+select sum(dummy_birth) from dummy_table;
+select avg(dummy_birth) from dummy_table;
+select max(dummy_birth) from dummy_table;
+select min(dummy_birth) from dummy_table;
+select stddev(dummy_birth) from dummy_table;
+select variance(dummy_birth) from dummy_table;
+~~~~~~
 
 ##### 2. GROUP BY #####
 
@@ -154,10 +265,6 @@ GROUP BY절의 특징
 ##### 3. HAVING절 #####
 
 FROM절에 정의된 집합에 WHERE의 조건절이 적용된 결과가 GROUP BY절의 대상이 되며, WHERE절에 적용된 결과에 대해서 HAVING절의 조건이 적용된다.
-
-##### 4. CASE 표현을 활용한 월별 데이터 집계 #####
-
-##### 5. 집계 함수와 NULL 처리 #####
 
 # 8절 ORDER BY 절 #
 
@@ -186,6 +293,25 @@ ROWNUM : Oracle에서 순위가 가장 높은 N개의 로우에 대해서 ROWNUM
 
 # 9절 조인(JOIN) #
 
+##### 1. JOIN 개요 #####
+
 2개 이상의 테이블을 연결 및 결합을 하여 데이터를 출력하는것을 JOIN이라 한다.
 PK, FK의 관계로 테이블을 조인할수 있으며, 논리적인 값들의 연관으로도 JOIN이 가능하다.
 2개 이상의 다수 테이블이 사용된다면, 옵티마이저에 의해 순차적인 조인을 처리한다.
+
+##### 2. EQUI JOIN #####
+
+EQUI JOIN은 2개의 테이블간에 칼럼값들이 서로 정확하게 일치하는경우 사용한다.
+
+~~~~~~
+SELECT table1.column_name table2.column_name
+FROM table1 INNER JOIN table2
+ON tabe1.column_name = table2.column_name;
+~~~~~~
+
+위와 같이 ON절에 JOIN 조건을 넣으면 된다. 위의 SQL을 보면 '.'을 사용하는데 JOIN하는 테이블간의 컬럼이 동일할 경우가 있기 때문에 위와같이 테이블명.컬럼 형식으로 사용하는것이, 가독성이나 유지보수에 도움이 된다.
+N개의 테이블을 JOIN하려면 N-1ro dltkddml whrjsdl vlfdygkek.
+
+##### 3. Non EQUI JOIN #####
+
+비등가 JOIN은 2개의 테이블의 값이 정확하게 일치하지 않는 경우의 JOIN을 말한다. 따라서 '=' 연산자가 아닌 다른 연산자들을 사용하여 JOIN을 한다.
