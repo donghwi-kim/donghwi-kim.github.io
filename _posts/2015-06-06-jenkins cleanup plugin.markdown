@@ -4,7 +4,7 @@ title:	"jenkins cleanup plugin"
 date:	2015-06-06 22:00:00
 categories:	jekyll update
 ---
-Git, Jenkins 조합으로 소스 관리 및 빌드 배포를 하고 있다.
+> Git, Jenkins 조합으로 소스 관리 및 빌드 배포를 하고 있다.
 
 > 주 단위로 배포를 하는 경우, 차주에 나가야할 소스는 develop이나 반영될 branch에 적용되어서는 안된다.
 > 반영이 되어버리면 이번 반영에 영향을 미치기 때문이다.
