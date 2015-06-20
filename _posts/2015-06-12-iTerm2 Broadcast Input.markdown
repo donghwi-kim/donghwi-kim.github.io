@@ -1,7 +1,7 @@
 ---
 layout:	post
-title:	"iterm2 broadcast input"
-date:	2015-06-06 22:00:00
+title:	"iTerm2 Broadcast Input"
+date:	2015-06-12 22:00:00
 categories:	jekyll update
 ---
 서버를 설치 및 셋팅을 하다보면 종종 여러개의 동일한 서버를 동일한 환경으로 설정을 만들어야 하거나 서버를 여러대 증설하여 이전 상태와 동일하게 설치를 해야하는 경우가 있다.
