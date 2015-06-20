@@ -12,7 +12,7 @@ categories:	jekyll update
 
 보이는것과 같이 Shell menu => Broadcast Input이라는 기능이 있다. 보이는것과 같이 해당 기능에는 4가지의 옵션이 있다.
 
-![](/img/iTerm2/BroadcastOption.png)
+![](/img/iTerm2/BroadCastOption.png)
 
 * Send Input to Current Session Only
 * Broadcast Input to All Panes in All Tabs
